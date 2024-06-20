@@ -1,4 +1,5 @@
-php crud api example with dbAuth
+*php crud api example with dbAuth*
+
 copy api.php + include.api.php on your site
 copy log.html
 configure DB in api.php
