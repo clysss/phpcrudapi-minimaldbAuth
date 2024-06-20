@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>axios - post example</title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  </head>
+  <body class="container">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <h1>axios.post</h1>
+
+    <form role="form" class="form" onsubmit="return false;">
+      <div class="form-group">
+        <label for="data">JSON</label>
+        <textarea id="data" class="form-control" rows="5">{"username":"a","password":"aaaa"}</textarea>
+      </div>
+      <button id="post" type="button" class="btn btn-primary">POST</button>
+    </form>
+
+    <div id="output" class="container"></div>
+    <div id="output2" class="container"></div>
+    <script>
+      (function () {
+        var output = document.getElementById('output');
+        document.getElementById('post').onclick = function () {
+          var data = document.getElementById('data').value;
+axios.defaults.withCredentials = true;
+
+          axios.post('/api.php/login', JSON.parse(data))
+            .then(function (res) {
+              output.className = 'container';
+              output.innerHTML = JSON.stringify(res.data);
+            })
+            .catch(function (err) {
+              output.className = 'container text-danger';
+              output.innerHTML = err.message;
+            });
+          
+          axios.get('/api.php/me')
+            .then(function (res) {
+              output2.className = 'container';
+              output2.innerHTML = JSON.stringify(res.data);
+            })
+            .catch(function (err) {
+              output2.className = 'container text-danger';
+              output2.innerHTML = err.message;
+            });
+        };
+      })();
+    </script>
+  </body>
+</html>
